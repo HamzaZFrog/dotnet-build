@@ -1,3 +1,4 @@
+# .github/workflows/docker-image.yml
 name: Build and Push Docker Image
 
 on:
@@ -20,9 +21,9 @@ jobs:
 
       - name: Build the .NET application
         run: |
-          mkdir -p /home/runner/work/dotnet-build/dotnet-build/HelloWorld/publish
-          dotnet clean ./HelloMsBuild/Hello.csproj
-          dotnet publish ./HelloMsBuild/Hello.csproj -c Release -r win-x64 --self-contained=true -o /home/runner/work/dotnet-build/dotnet-build/HelloWorld/publish
+          dotnet restore src/MyDotNetApp/MyDotNetApp.csproj
+          dotnet clean src/MyDotNetApp/MyDotNetApp.csproj
+          dotnet publish src/MyDotNetApp/MyDotNetApp.csproj -c Release -o publish
 
       - name: Log in to JFrog Artifactory
         run: echo "${{ secrets.ARTIFACTORY_PASSWORD }}" | docker login ${{ secrets.ARTIFACTORY_URL }} -u ${{ secrets.ARTIFACTORY_USERNAME }} --password-stdin
@@ -34,3 +35,4 @@ jobs:
 
       - name: Push Docker image to JFrog Artifactory
         run: docker push ${{ secrets.ARTIFACTORY_URL }}/myapp:latest
+

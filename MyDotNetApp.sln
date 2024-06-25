@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3CE75359-E466-447C-85D8-CCD7AACA299D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyDotNetApp", "MyDotNetApp", "{C49D70FA-5038-4E2F-B5B0-957F7AA547D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDotNetApp", "src\MyDotNetApp\MyDotNetApp\MyDotNetApp.csproj", "{F6EB00E6-B959-46B4-9DFE-F3027E794532}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6EB00E6-B959-46B4-9DFE-F3027E794532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EB00E6-B959-46B4-9DFE-F3027E794532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EB00E6-B959-46B4-9DFE-F3027E794532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EB00E6-B959-46B4-9DFE-F3027E794532}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C49D70FA-5038-4E2F-B5B0-957F7AA547D4} = {3CE75359-E466-447C-85D8-CCD7AACA299D}
+		{F6EB00E6-B959-46B4-9DFE-F3027E794532} = {C49D70FA-5038-4E2F-B5B0-957F7AA547D4}
+	EndGlobalSection
+EndGlobal
