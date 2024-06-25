@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Build the .NET application
-        run: dotnet publish ./HelloWorld/HelloWorld.csproj -c Release -r win-x64 --self-contained=true -o /app/publish
+        run: dotnet publish ./DotNet.GitHubAction/DotNet.GitHubAction.csproj -c Release -r win-x64 --self-contained=true -o /app/publish
 
       - name: Log in to JFrog Artifactory
         run: echo "${{ secrets.ARTIFACTORY_PASSWORD }}" | docker login ${{ secrets.ARTIFACTORY_URL }} -u ${{ secrets.ARTIFACTORY_USERNAME }} --password-stdin
