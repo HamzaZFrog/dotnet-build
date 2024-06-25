@@ -1,22 +1,20 @@
-# Set the base image as the .NET 6.0 SDK (this includes the runtime)
-FROM mcr.microsoft.com/dotnet/sdk:6.0 as build-env
+# Use the official .NET SDK image as a build environment
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
 
-# Copy everything and publish the release (publish implicitly restores and builds)
-COPY . ./
-RUN dotnet publish ./HelloMsBuild/Hello.csproj -c Release -o out --no-self-contained
+# Copy the project file and restore the NuGet packages
+COPY ["HelloWorld.csproj", "."]
+RUN dotnet restore "HelloWorld.csproj"
 
-# Label the container
-LABEL maintainer="David Pine <david.pine@microsoft.com>"
-LABEL repository="https://github.com/dotnet/samples"
-LABEL homepage="https://github.com/dotnet/samples"
+# Copy the remaining source files and build the application
+COPY . .
+RUN mkdir -p /app/publish
+RUN dotnet publish "HelloWorld.csproj" -c Release -r win-x64 --self-contained=true -o /app/publish
 
-# Label as GitHub action
-LABEL com.github.actions.name=".NET code metric analyzer"
-LABEL com.github.actions.description="A Github action that maintains a CODE_METRICS.md file, reporting cylcomatic complexity, maintainability index, etc."
-LABEL com.github.actions.icon="sliders"
-LABEL com.github.actions.color="purple"
+# Use a runtime image to run the executable
+FROM mcr.microsoft.com/dotnet/runtime-deps:6.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/publish .
 
-# Relayer the .NET SDK, anew with the build output
-FROM mcr.microsoft.com/dotnet/sdk:6.0
-COPY --from=build-env /out .
-ENTRYPOINT [ "dotnet", "/DotNet.GitHubAction.dll" ]
+# Specify the entry point for the application
+ENTRYPOINT ["./HelloWorld.exe"]
