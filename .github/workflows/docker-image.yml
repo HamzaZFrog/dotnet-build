@@ -1,0 +1,33 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Build the .NET application
+        run: dotnet publish ./HelloWorld/HelloWorld.csproj -c Release -r win-x64 --self-contained=true -o /app/publish
+
+      - name: Log in to JFrog Artifactory
+        run: echo "${{ secrets.ARTIFACTORY_PASSWORD }}" | docker login ${{ secrets.ARTIFACTORY_URL }} -u ${{ secrets.ARTIFACTORY_USERNAME }} --password-stdin
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t myapp:latest .
+          docker tag myapp:latest ${{ secrets.ARTIFACTORY_URL }}/myapp:latest
+
+      - name: Push Docker image to JFrog Artifactory
+        run: docker push ${{ secrets.ARTIFACTORY_URL }}/myapp:latest
