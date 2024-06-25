@@ -3,13 +3,13 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 # Copy the project file and restore the NuGet packages
-COPY ["HelloWorld.csproj", "."]
-RUN dotnet restore "HelloWorld.csproj"
+COPY ["./HelloMsBuild/Hello.csproj", "."]
+RUN dotnet restore "Hello.csproj"
 
 # Copy the remaining source files and build the application
 COPY . .
 RUN mkdir -p /app/publish
-RUN dotnet publish "HelloWorld.csproj" -c Release -r win-x64 --self-contained=true -o /app/publish
+RUN dotnet publish "Hello.csproj" -c Release -r win-x64 --self-contained=true -o /app/publish
 
 # Use a runtime image to run the executable
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0 AS runtime

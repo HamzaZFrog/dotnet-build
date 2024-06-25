@@ -21,7 +21,7 @@ jobs:
       - name: Build the .NET application
         run: |
           mkdir -p /home/runner/work/dotnet-build/dotnet-build/HelloWorld/publish
-          dotnet publish ./HelloWorld/HelloWorld.csproj -c Release -r win-x64 --self-contained=true -o /home/runner/work/dotnet-build/dotnet-build/HelloWorld/publish
+          dotnet publish ./HelloMsBuild/Hello.csproj -c Release -r win-x64 --self-contained=true -o /home/runner/work/dotnet-build/dotnet-build/HelloWorld/publish
 
       - name: Log in to JFrog Artifactory
         run: echo "${{ secrets.ARTIFACTORY_PASSWORD }}" | docker login ${{ secrets.ARTIFACTORY_URL }} -u ${{ secrets.ARTIFACTORY_USERNAME }} --password-stdin
