@@ -8,12 +8,23 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Text.Encodings.Web" Version="4.5.0" />
-    <PackageReference Include="Halibut" Version="4.4.6" />
+    <PackageReference Include="Halibut" Version="4.4.6">
+      <ExcludeAssets>Newtonsoft.Json</ExcludeAssets>
+    </PackageReference>
     <PackageReference Include="Wire" Version="1.0.0" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="4.4.1" />
-    <PackageReference Include="QuantConnect.Common" Version="2.4.0.1" />
+    <PackageReference Include="QuantConnect.Common" Version="2.4.0.3493">
+      <ExcludeAssets>Newtonsoft.Json</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="QuantConnect.Configuration" Version="2.4.0.3493">
+      <ExcludeAssets>Newtonsoft.Json</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="QuantConnect.Logging" Version="2.4.0.3493">
+      <ExcludeAssets>Newtonsoft.Json</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
+
 
 
