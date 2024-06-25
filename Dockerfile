@@ -8,6 +8,10 @@ RUN dotnet restore "Hello.csproj"
 
 # Copy the remaining source files and build the application
 COPY . .
+
+# Clean the obj directory to avoid duplicate attribute issues
+RUN dotnet clean "Hello.csproj"
+
 RUN mkdir -p /app/publish
 RUN dotnet publish "Hello.csproj" -c Release -r win-x64 --self-contained=true -o /app/publish
 
